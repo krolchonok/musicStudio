@@ -1,179 +1,450 @@
+:root {
+  /* Светлая тема (по умолчанию) */
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --accent-color: #3498db;
+  --accent-color-hover: #2980b9;
+  --slider-bg: #e0e0e0;
+  --slider-fill: #3498db;
+  --slider-thumb: #2980b9;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-color: #2ecc71;
+  --loader-color: #3498db;
+  --icon-color: #555;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #f5f5f5;
+  --accent-color: #00b4d8;
+  --accent-color-hover: #0096c7;
+  --slider-bg: #333333;
+  --slider-fill: #00b4d8;
+  --slider-thumb: #0096c7;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --success-color: #00c17c;
+  --loader-color: #00b4d8;
+  --icon-color: #ccc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0 auto;
-}
-
-.controls {
-  border-radius: 5px;
-  margin: 0 20px;
-  padding: 10px;
-}
-
-.loading {
-  color: blue;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-button {
-  padding: 8px 15px;
-  margin: 5px 0;
-  cursor: pointer;
-}
-
-label {
-  display: block;
-}
-
-input[type="range"] {
-  width: 100%;
-}
-
-.upload-container {
-  width: 80%;
-  /* Устанавливаем контейнер на всю ширину */
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  margin: 10px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden;
 }
 
-.upload-label {
-  display: block;
-  padding: 10px;
-  background-color: white;
-  color: black;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 20px;
-  border: 5px solid black;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.upload-label:hover {
-  background-color: gray;
-  color: white;
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
 }
 
 .main {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo i {
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.track-info {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-.text {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+.track-name {
+  font-size: 16px;
+  text-align: center;
   padding: 10px;
-  border: 5px solid black;
-  border-radius: 20px;
+  background-color: var(--slider-bg);
+  border-radius: 8px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.upload-label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  border: none;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.upload-label:hover {
+  background-color: var(--accent-color-hover);
+}
+
+.upload-label i {
+  font-size: 18px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.loader-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
 }
 
 .loader {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 4px solid rgba(0, 123, 255, 0.2);
-  /* Цвет рамки */
-  border-top-color: #007bff;
-  /* Цвет анимации */
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(var(--loader-color), 0.3);
+  border-top-color: var(--loader-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-.hidden {
-  display: none;
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
-.seekbarDiv {
-  width: 100%;
+.progress-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.time {
+  font-size: 14px;
+  min-width: 40px;
+  font-variant-numeric: tabular-nums;
+}
+
+.seekbar-container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  display: flex;
   align-items: center;
 }
 
-.buttons {
+.progress-slider {
+  width: 100%;
+  z-index: 2;
+}
+
+.progress-bar {
+  position: absolute;
+  height: 4px;
+  background-color: var(--slider-bg);
+  width: 100%;
+  border-radius: 2px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.main-controls {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  border: 5px solid black;
-  border-radius: 30px;
+  gap: 30px;
+  padding: 15px 0;
 }
 
-.labels {
-  border: 5px solid black;
-  border-radius: 30px;
-  padding: 15px 25px;
+.play-button,
+.save-button {
+  border: none;
+  background-color: var(--accent-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.2s, background-color 0.2s;
 }
 
-button {
-  border: 0;
-  background: 0;
-  font-size: 25px;
-  color: black;
+.play-button:hover,
+.save-button:hover {
+  background-color: var(--accent-color-hover);
+  transform: scale(1.05);
+}
+
+.play-button i,
+.save-button i {
+  font-size: 18px;
+}
+
+.adjustment-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.control-group i {
+  color: var(--icon-color);
+  width: 18px;
 }
 
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 5px;
-  border-radius: 5px;
-  background: #d3d3d3;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--slider-bg);
   outline: none;
-  opacity: 0.7;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
+  position: relative;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: black;
+  background: var(--slider-thumb);
   cursor: pointer;
-  border: 0;
-}
-
-.slider::-moz-range-progress {
-  /* Для Firefox */
-  background-color: black;
-  /* Цвет диапазона слева от ползунка */
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: black;
+  background: var(--slider-thumb);
   cursor: pointer;
-  border: 0;
+  border: none;
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1;
-  /* Fully shown on mouse-over */
+.slider::-moz-range-progress {
+  background-color: var(--slider-fill);
+  height: 4px;
+  border-radius: 2px;
 }
 
-.seekbar {
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#themeToggle {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
-  flex-direction: row;
-}
-
-.time {
-  justify-content: center;
   align-items: center;
-  display: flex;
-  margin: 3px;
+  justify-content: center;
+  transition: background-color 0.2s;
 }
 
+#themeToggle:hover {
+  background-color: var(--border-color);
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Анимации */
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Адаптивный дизайн */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .main,
+  .controls {
+    padding: 15px;
+  }
+
+  .app-title {
+    font-size: 20px;
+  }
+
+  .main-controls {
+    gap: 20px;
+  }
+
+  .play-button,
+  .save-button {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .main,
+  .controls {
+    padding: 15px 10px;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+
+  .time {
+    min-width: 35px;
+    font-size: 12px;
+  }
+
+  .control-group label {
+    font-size: 13px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+
+  #themeToggle {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .logo i {
+    font-size: 20px;
+  }
+
+  .main-controls {
+    gap: 15px;
+  }
+
+  .play-button,
+  .save-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .play-button i,
+  .save-button i {
+    font-size: 16px;
+  }
+
+  .upload-label {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Для маленьких экранов */
+@media screen and (max-width: 320px) {
+  .app-title {
+    font-size: 16px;
+  }
+
+  .control-group label {
+    font-size: 12px;
+  }
+
+  .time {
+    min-width: 30px;
   }
 }
